@@ -21,16 +21,23 @@ const char* bankesd_ciphers_string_vcdn( const vcdn_t* cash_document_num );
 
 
 typedef struct Hash {
-    const char* hash;
+    char* hash;
     void* parts;
 } hash_t;
 
+hash_t* bankesd_ciphers_init_hash( const unsigned int lenght_of_hash_bits );
+hash_t* bankesd_ciphers_init_hash_parts( const unsigned int lenght_of_hash_bits, void* parts_struct );
 
 typedef struct SHAsum {
     hash_t* hash;
     void* checksum_cipher;
 } sha_t;
 
+hash_t* bankesd_ciphers_sha( const char* msg, const unsigned short bitlength, const unsigned int rounds );
+hash_t* bankesd_ciphers_sha1( const char* msg );
+hash_t* bankesd_ciphers_sha3( const char* msg );
+hash_t* bankesd_ciphers_sha256( const char* msg );
+hash_t* bankesd_ciphers_sha512( const char* msg );
 
 enum PKI_CIPHERS {
     DIFFIE,
@@ -71,6 +78,8 @@ typedef struct AESsum {
 } aes_t;
 
 
+hash_t* aes();
+
 typedef struct AES_TKIP {
     aes_t* aes;
     tkip_t* tkip;
@@ -82,4 +91,4 @@ typedef struct AES_TKIP {
 }
 #endif
 
-#endif
+#endif // __CIPHERS_H_

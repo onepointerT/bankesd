@@ -11,10 +11,13 @@ endif()
 include_directories( ${PROJECT_SOURCE_DIR} )
 include_directories( ${PROJECT_SOURCE_DIR}/cipher )
 include_directories( ${PROJECT_SOURCE_DIR}/bankesd )
+include_directories( ${PROJECT_SOURCE_DIR}/lib/libm/src/ce-libm )
+
+add_subdirectory( lib/libm )
 
 file( GLOB BANKESD_SRCFILES_C cipher/*.c bankesd/*.c )
 add_library( bankesdc STATIC ${BANKESD_SRCFILES_C} )
-# target_link_libraries( bankesdc  )
+target_link_libraries( bankesdc m_ce )
 
 file( GLOB BANKESD_SRCFILES_CPP bankesd/*.cpp )
 add_library( bankesd STATIC ${BANKESD_SRCFILES_CPP} )
